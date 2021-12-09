@@ -1,32 +1,23 @@
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class STG extends JPanel {
 
     private GameManager _gmanager;
-    private CardLayout _cardLayout;
 
     public STG() {
-        _cardLayout = new CardLayout();
-        setLayout(_cardLayout);
+        setLayout(null);
 
         _gmanager = new GameManager(this);
 
         setFocusable(true);
     }
 
-    public void last() {
-        _cardLayout.last(this);
-        // _cardLayout.show(this, "title");
-    }
-
     private void startGameLoop() {
-        while(true) {
+        while (true) {
             try {
                 Thread.sleep(20);
                 repaint();
-            } catch(InterruptedException e) {
+            } catch (InterruptedException e) {
                 break;
             }
         }

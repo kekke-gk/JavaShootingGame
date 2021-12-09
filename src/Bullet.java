@@ -1,11 +1,11 @@
 import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 
 public class Bullet extends DrawableObject {
 
-    public Bullet(float x, float y) {
-        super(x, y, 0, -4);
+    protected final static int SIZE = 10;
+
+    public Bullet(float x, float y, float vx, float vy) {
+        super(x, y, vx, vy);
     }
 
     @Override
@@ -13,16 +13,17 @@ public class Bullet extends DrawableObject {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        x += vx;
-        y += vy;
+        g2.setPaint(Color.red);
+        fillCircle(g2, SIZE / 2);
+    }
 
-        if (x < 0 || Settings.WIDTH < x ||
-            y < 0 || Settings.HEIGHT < y) {
+    @Override
+    protected void update() {
+        super.update();
+
+        if (x - SIZE < 0 || Settings.WIDTH + SIZE < x ||
+            y - SIZE < 0 || Settings.HEIGHT + SIZE < y) {
             this.getParent().remove(this);
         }
-
-        g2.setPaint(Color.red);
-        g2.fillOval((int)x, (int)y, 30, 30);
     }
-    
 }
