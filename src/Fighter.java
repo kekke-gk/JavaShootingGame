@@ -1,17 +1,16 @@
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
-public class PlayableFighter extends DrawableObject implements KeyListener {
+public class Fighter extends DrawableObject implements KeyListener {
     
-    protected final static int SIZE = 30;
+    protected final static int R = 15;
     protected final static int SPEED = 2;
 
     protected boolean keyLeft, keyRight, keyUp, keyDown;
     protected boolean keyZ;
 
-    public PlayableFighter() {
-        super(Settings.WIDTH / 2, Settings.HEIGHT - 100);
+    public Fighter() {
+        super(Settings.WIDTH / 2, Settings.HEIGHT - 100, R);
     }
 
     @Override
@@ -22,19 +21,21 @@ public class PlayableFighter extends DrawableObject implements KeyListener {
         if(keyZ) shoot();
 
         g2.setPaint(Color.blue);
-        fillCircle(g2, SIZE / 2);
+        fillCircle(g2, R);
     }
 
     @Override
     protected void update() {
         super.update();
         
-        vx = SPEED * (keyLeft ? -1 : keyRight ? 1 : 0);
-        vy = SPEED * (keyUp ? -1 : keyDown ? 1 : 0);
+        _vx = SPEED * (keyLeft ? -1 : keyRight ? 1 : 0);
+        _vy = SPEED * (keyUp ? -1 : keyDown ? 1 : 0);
+
+        stopAtEdge();
     }
 
     private void shoot() {
-        this.add(new Bullet(x, y, 0, -5));
+        this.add(new Bullet(_x, _y, 0, -5));
     }
     
     @Override
