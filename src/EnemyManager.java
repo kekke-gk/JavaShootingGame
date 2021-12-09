@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class EnemyManager {
@@ -8,7 +9,7 @@ public class EnemyManager {
     public EnemyManager(GameState gs) {
         _gs = gs;
 
-        analyze();
+        analyze(new File("stage_01.txt"));
     }
 
     public void popEnemys(int curTime) {
@@ -23,11 +24,24 @@ public class EnemyManager {
         }
     }
 
-    private void analyze() {
+    private void analyze(File f) {
         _scenario = new HashMap<>();
 
-        EnemyInfo info = new EnemyInfo(Settings.WIDTH / 2, 0, 0);
-
-        _scenario.put(50, info);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("//") || line.isBlank()) continue;
+                String[] valStrs = line.split(",");
+                int[] vals = new int[valStrs.length];
+                for (int i = 0; i < valStrs.length; i++) {
+                    vals[i] = Integer.parseInt(valStrs[i]);
+                }
+                _scenario.put(vals[0], new EnemyInfo(vals[1], vals[2], vals[3]));
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
