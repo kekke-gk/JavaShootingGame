@@ -37,7 +37,7 @@ public class STG extends JPanel {
 
         JFrame frame = new JFrame("STG Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(480, 640);
+        frame.setSize(Settings.WIDTH, Settings.HEIGHT);
         frame.add(stg);
         frame.setVisible(true);
 

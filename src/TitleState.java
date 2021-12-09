@@ -4,8 +4,6 @@ import javax.swing.*;
 
 public class TitleState extends ModeState {
 
-    private GameManager _gm;
-
     private int _cursorPos = 0;
 
     // メインタイトルの位置
@@ -19,7 +17,7 @@ public class TitleState extends ModeState {
 	private final static int CURSOR		= 150;
 
     public TitleState(GameManager gm) {
-        _gm = gm;
+        super(gm);
     }
 
     @Override
@@ -71,12 +69,13 @@ public class TitleState extends ModeState {
                 switch (_cursorPos) {
                     case 0:
                         System.out.println("Go to Main");
+                        _gm.setState(new GameState(_gm));
                         break;
                 
                     case 1:
                         System.out.println("Go to Exit");
                         // this.setFocusable(false);
-                        _gm.setState(new ExitState());
+                        _gm.setState(new ExitState(_gm));
                         break;
                 }
                 break;
