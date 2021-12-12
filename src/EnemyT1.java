@@ -3,7 +3,7 @@ import java.awt.*;
 public class EnemyT1 extends BaseEnemy {
 
     private final static int VY = 2;
-    private final static int HP = 5;
+    private final static int HP = 2;
     private final static int RATE = 50;
     private final static int SCORE = 10;
 

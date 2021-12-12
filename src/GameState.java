@@ -57,8 +57,10 @@ public class GameState extends ModeState {
             for (Bullet bullet : getMyBullets()) {
                 if (!enemy.collide(bullet)) continue;
 
-                remove(enemy);
-                _score += enemy._score;
+                if (--enemy._hp == 0) {
+                    remove(enemy);
+                    _score += enemy._score;
+                }
                 _fighter.remove(bullet);
             }
         }
