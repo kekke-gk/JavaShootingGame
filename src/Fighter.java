@@ -5,9 +5,12 @@ public class Fighter extends DrawableObject implements KeyListener {
     
     protected final static int R = 15;
     protected final static int SPEED = 2;
+    protected final static int FIRE_INTVL = 20;
 
     protected boolean keyLeft, keyRight, keyUp, keyDown;
     protected boolean keyZ;
+
+    protected int fire_intvl = 0;
 
     public Fighter() {
         super(Settings.WIDTH / 2, Settings.HEIGHT - 100, R);
@@ -18,7 +21,9 @@ public class Fighter extends DrawableObject implements KeyListener {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        if(keyZ) shoot();
+        if (fire_intvl > 0) fire_intvl--;
+
+        if (keyZ && fire_intvl == 0) shoot();
 
         g2.setPaint(Color.blue);
         fillCircle(g2, R);
@@ -35,6 +40,7 @@ public class Fighter extends DrawableObject implements KeyListener {
     }
 
     private void shoot() {
+        fire_intvl = FIRE_INTVL;
         this.add(new Bullet(_x, _y, 0, -5));
     }
     
