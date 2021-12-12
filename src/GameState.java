@@ -27,12 +27,22 @@ public class GameState extends ModeState {
             _gm.setState(new ExitState(_gm));
         }
 
+        if (isStageClear()) {
+            _gm.setState(new ExitState(_gm));
+        }
+
         g2.setPaint(Color.white);
         g2.drawString("Time: " + _curTime, 10, 30);
 
         _em.popEnemys(_curTime);
 
         _curTime++;
+    }
+
+    private boolean isStageClear() {
+        return _em.remainEnemyNum() == 0 &&
+               getEnemys().size() == 0 &&
+               getEnemysBullets().size() == 0;
     }
 
     private boolean collisionDetection() {

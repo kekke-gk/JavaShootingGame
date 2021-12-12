@@ -5,6 +5,7 @@ public class EnemyManager {
 
     private Map<Integer, EnemyInfo> _scenario;
     private GameState _gs;
+    private int _curTime = 0;
 
     public EnemyManager(GameState gs) {
         _gs = gs;
@@ -13,6 +14,7 @@ public class EnemyManager {
     }
 
     public void popEnemys(int curTime) {
+        _curTime = curTime;
         if (!_scenario.containsKey(curTime)) return;
 
         EnemyInfo info = _scenario.get(curTime);
@@ -22,6 +24,15 @@ public class EnemyManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int remainEnemyNum() {
+        int count = 0;
+        for(var entry : _scenario.entrySet()) {
+            System.out.println(entry.getKey());
+            if (entry.getKey() > _curTime) count++;
+        }
+        return count;
     }
 
     private void analyze(File f) {
