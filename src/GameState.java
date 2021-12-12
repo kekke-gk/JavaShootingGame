@@ -5,6 +5,7 @@ import java.awt.*;
 public class GameState extends ModeState {
 
     private int _curTime = 0;
+    private int _score = 0;
     private Fighter _fighter;
     private EnemyManager _em;
 
@@ -33,6 +34,7 @@ public class GameState extends ModeState {
 
         g2.setPaint(Color.white);
         g2.drawString("Time: " + _curTime, 10, 30);
+        g2.drawString("Score: " + _score, 10, 50);
 
         _em.popEnemys(_curTime);
 
@@ -56,6 +58,7 @@ public class GameState extends ModeState {
                 if (!enemy.collide(bullet)) continue;
 
                 remove(enemy);
+                _score += enemy._score;
                 _fighter.remove(bullet);
             }
         }

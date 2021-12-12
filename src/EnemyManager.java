@@ -29,7 +29,6 @@ public class EnemyManager {
     public int remainEnemyNum() {
         int count = 0;
         for(var entry : _scenario.entrySet()) {
-            System.out.println(entry.getKey());
             if (entry.getKey() > _curTime) count++;
         }
         return count;
