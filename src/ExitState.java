@@ -1,14 +1,25 @@
 public class ExitState extends BaseMenuState {
 
-    private final static String TITLE = "Finish";
     private final static String[] MENU_ITEMS = {
         "Play Again",
         "Back to Menu",
         "Quit"
     };
 
-    public ExitState(GameManager gm) {
-        super(gm, TITLE, MENU_ITEMS);
+    public ExitState(GameManager gm, GameResult result) {
+        super(gm, getTitle(result), MENU_ITEMS);
+    }
+
+    private static String getTitle(GameResult result) {
+        String title;
+        if (result.isClear) {
+            title = "Stage Clear";
+        } else {
+            title = "Game Over";
+        }
+
+        title += " Score: " + result.score;
+        return title;
     }
 
     @Override

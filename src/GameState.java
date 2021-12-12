@@ -25,11 +25,13 @@ public class GameState extends ModeState {
         Graphics2D g2 = (Graphics2D) g;
 
         if (collisionDetection()) {
-            _gm.setState(new ExitState(_gm));
+            var result = new GameResult(false, _score);
+            _gm.setState(new ExitState(_gm, result));
         }
 
         if (isStageClear()) {
-            _gm.setState(new ExitState(_gm));
+            var result = new GameResult(true, _score);
+            _gm.setState(new ExitState(_gm, result));
         }
 
         g2.setPaint(Color.white);
